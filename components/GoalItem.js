@@ -10,7 +10,7 @@ export default function GoalItem({ item, onDeleteHandler }) {
             <View style={styles.goalItem}>
                 <Text>{item.name}</Text>
             </View>
-        </TouchableOpacity >
+        </TouchableOpacity>
     )
 }
 
