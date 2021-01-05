@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from 'react-native';
+import GoalInput from './components/GoalInput';
 
 export default function App() {
-  const [enteredGoal, setEnteredGoal] = useState('');
   const [courseGoals, setCourseGoals] = useState([])
 
-  const goalInputHandler = (text) => setEnteredGoal(text);
-  const onAddGoalHnadler = () => {
+  const onAddGoalHandler = (enteredGoal) => {
     setCourseGoals(courseGoals => [...courseGoals, enteredGoal]);
     console.log(courseGoals);
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.goalForm}>
-        <TextInput
-          placeholder="Course Goal"
-          style={styles.goalInputText}
-          onChangeText={goalInputHandler} />
-        <Button title="ADD" onPress={onAddGoalHnadler} />
-      </View>
+      <GoalInput onAddGoalHandler={onAddGoalHandler} />
       <FlatList
         style={styles.goalsConatiner} 
         data={courseGoals}
@@ -51,16 +44,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#fff',
-  },
-  goalForm: {
-    margin: 40,
-    flexDirection: 'row'
-  },
-  goalInputText: {
-    width: '100%',
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccc'
   },
   goalsConatiner: {
     width: '100%',
