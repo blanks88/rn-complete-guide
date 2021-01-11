@@ -6,7 +6,7 @@ import Input from '../components/Input'
 import Card from '../components/Card'
 import SelectedNumber from '../components/SelectedNumber'
 
-export default function StartGamePage() {
+export default function StartGamePage({ onGameStart }) {
     const [confirmed, setConfirmed] = useState(false)
     const [enteredValue, setEnteredValue] = useState('');
     const [selectedNumber, setSelectedNumber] = useState(null);
@@ -16,7 +16,9 @@ export default function StartGamePage() {
         setSelectedNumber(null);
         setConfirmed(false);
         setEnteredValue('');
+        onGameStart(null);
     }
+
     const confirmInputHandler = () => {
         const chosenNumber = parseInt(enteredValue);
         if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
@@ -34,10 +36,10 @@ export default function StartGamePage() {
             return;
         }
 
+        Keyboard.dismiss();
         setConfirmed(true);
         setEnteredValue('');
         setSelectedNumber(chosenNumber);
-        Keyboard.dismiss();
     }
 
 
@@ -69,7 +71,7 @@ export default function StartGamePage() {
                         <SelectedNumber>
                             {selectedNumber}
                         </SelectedNumber>
-                        <Button title="START GAME" />
+                        <Button title="START GAME" onPress={() => onGameStart(selectedNumber)} />
                     </Card>
                 }
             </View>
