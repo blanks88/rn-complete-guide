@@ -1,12 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import Colors from '../constants/colors';
+import PText from './PText';
 
 export default function SelectedNumber({ children }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.number}>{children}</Text>
+            <PText style={styles.number}>{children}</PText>
         </View>
     )
 }

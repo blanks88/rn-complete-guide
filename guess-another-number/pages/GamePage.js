@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Alert, Button, StyleSheet, Text, View } from 'react-native'
 
-import SelectedNumber from '../components/SelectedNumber'
-import Card from '../components/Card'
+import SelectedNumber from '../components/SelectedNumber';
+import PText from '../components/PText';
+import Card from '../components/Card';
 
 function generateRandomBetween(min, max, exclude) {
     min = Math.ceil(min);
@@ -57,7 +58,7 @@ export default function GamePage({ selectedNumber, onReset, onGameOver }) {
 
     return (
         <View style={styles.page}>
-            <Text style={styles.pageTitle}>Opponent's Guess</Text>
+            <PText style={styles.pageTitle}>Oponent's Guess</PText>
             <SelectedNumber>
                 {currentGuess}
             </SelectedNumber>
@@ -82,7 +83,8 @@ const styles = StyleSheet.create({
     },
     pageTitle: {
         fontSize: 25,
-        marginVertical: 30
+        marginVertical: 30,
+        fontFamily: 'hack-bold',
     },
     buttonsContainer: {
         width: 350,

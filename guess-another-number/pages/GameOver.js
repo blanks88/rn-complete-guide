@@ -1,10 +1,12 @@
-import React from 'react'
-import { Button, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { Button, Image, StyleSheet, View } from 'react-native';
+
+import PText from '../components/PText';
 
 export default function GameOver({ totalRounds, selectedNuber, onReset }) {
     return (
         <View style={styles.page}>
-            <Text style={styles.pageTitle}> The Game is Over!</Text>
+            <PText style={styles.pageTitle}> The Game is Over!</PText>
 
             <View style={styles.imageContainer}>
                 <Image
@@ -18,8 +20,8 @@ export default function GameOver({ totalRounds, selectedNuber, onReset }) {
                 />
             </View>
 
-            <Text>Number of rounds: {totalRounds}</Text>
-            <Text>The number was: {selectedNuber}</Text>
+            <PText>Number of rounds: {totalRounds}</PText>
+            <PText>The number was: {selectedNuber}</PText>
             <Button title="RESET" onPress={onReset} />
         </View>
     )

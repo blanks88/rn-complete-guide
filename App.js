@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
 
 import Header from './guess-another-number/components/Header';
 import GameOver from './guess-another-number/pages/GameOver';
@@ -9,6 +11,14 @@ import StartGamePage from './guess-another-number/pages/StartGamePage';
 export default function App() {
   const [selectedNumber, setSelectedNumber] = useState();
   const [totalRounds, setTotalRounds] = useState(0);
+
+  let [fontsLoaded] = useFonts({
+    'hack': require('./assets/fonts/Hack-Regular.ttf'),
+    'hack-bold': require('./assets/fonts/Hack-Bold.ttf'),
+  });
+
+  if (!fontsLoaded) return <AppLoading />
+  
 
   const onResetHandler = () => {
     setSelectedNumber(null);

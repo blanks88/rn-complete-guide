@@ -3,6 +3,7 @@ import { Alert, Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, Vi
 
 import Colors from '../constants/colors'
 import Input from '../components/Input'
+import PText from '../components/PText'
 import Card from '../components/Card'
 import SelectedNumber from '../components/SelectedNumber'
 
@@ -46,9 +47,9 @@ export default function StartGamePage({ onGameStart }) {
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.page}>
-                <Text style={styles.pageTitle}>Star a new Game!</Text>
+                <PText style={styles.pageTitle}>Star a new Game!</PText>
                 <Card style={styles.inputCard}>
-                    <Text style={styles.cardTitle}>Select a Number</Text>
+                    <PText style={styles.cardTitle}>Select a Number</PText>
                     <Input
                         blurOnSubmit
                         value={enteredValue}
@@ -67,7 +68,7 @@ export default function StartGamePage({ onGameStart }) {
                 </Card>
                 {
                     confirmed && <Card style={styles.selectedNumberCard}>
-                        <Text>You selected</Text>
+                        <PText>You selected</PText>
                         <SelectedNumber>
                             {selectedNumber}
                         </SelectedNumber>
@@ -87,7 +88,8 @@ const styles = StyleSheet.create({
     },
     pageTitle: {
         fontSize: 25,
-        marginVertical: 30
+        marginVertical: 30,
+        fontFamily: 'hack-bold',
     },
     cardTitle: {
         fontSize: 18,
