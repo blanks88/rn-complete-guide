@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Alert, Button, StyleSheet, Text, View } from 'react-native'
 
 import SelectedNumber from '../components/SelectedNumber'
@@ -16,11 +16,18 @@ function generateRandomBetween(min, max, exclude) {
 
 }
 
-export default function GamePage({ selectedNumber, onReset }) {
+export default function GamePage({ selectedNumber, onReset, onGameOver }) {
     const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, selectedNumber));
+    const [rounds, setRounds] = useState(0);
     const currentHight = useRef(100);
     const currentLow = useRef(1);
 
+    useEffect(() => {
+        if(currentGuess === selectedNumber) {
+            onGameOver(rounds)
+        }
+    }, [currentGuess, selectedNumber, onGameOver])
+    
     const nextGuessHandler = (direction) => {
         if ((direction == 'lower' && currentGuess > selectedNumber)
             || (direction == 'grater' && currentGuess < selectedNumber)) {
@@ -43,9 +50,9 @@ export default function GamePage({ selectedNumber, onReset }) {
         }
 
         setCurrentGuess(
-            generateRandomBetween(currentLow.current, currentHight.current, selectedNumber)
+            generateRandomBetween(currentLow.current, currentHight.current, currentGuess)
         );
-
+        setRounds(r => r + 1);
     };
 
     return (
