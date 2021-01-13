@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Alert, Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 
-import Colors from '../constants/colors'
+import SelectedNumber from '../components/SelectedNumber'
+import PButton from '../components/PButton'
 import Input from '../components/Input'
 import PText from '../components/PText'
 import Card from '../components/Card'
-import SelectedNumber from '../components/SelectedNumber'
 
 export default function StartGamePage({ onGameStart }) {
     const [confirmed, setConfirmed] = useState(false)
@@ -59,10 +59,14 @@ export default function StartGamePage({ onGameStart }) {
                     />
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
-                            <Button title="RESET" color={Colors.accent} onPress={resetInputHandler} />
+                            <PButton color={'accent'} secondary={true} onPress={resetInputHandler}>
+                                RESET
+                            </PButton>
                         </View>
                         <View style={styles.button}>
-                            <Button title="CONFIRM" color={Colors.primay} onPress={confirmInputHandler} />
+                            <PButton onPress={confirmInputHandler}>
+                                CONFIRM
+                            </PButton>
                         </View>
                     </View>
                 </Card>
@@ -72,7 +76,9 @@ export default function StartGamePage({ onGameStart }) {
                         <SelectedNumber>
                             {selectedNumber}
                         </SelectedNumber>
-                        <Button title="START GAME" onPress={() => onGameStart(selectedNumber)} />
+                        <PButton onPress={() => onGameStart(selectedNumber)}>
+                            START GAME
+                        </PButton>
                     </Card>
                 }
             </View>
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     button: {
-        width: 120
+        width: 140
     },
     selectedNumberCard: {
         marginVertical: 20,
