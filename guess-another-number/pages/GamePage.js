@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Alert, Button, StyleSheet, Text, View } from 'react-native'
+import { Alert, Button, ScrollView, StyleSheet, View } from 'react-native'
 
 import SelectedNumber from '../components/SelectedNumber';
 import PText from '../components/PText';
@@ -19,16 +19,16 @@ function generateRandomBetween(min, max, exclude) {
 
 export default function GamePage({ selectedNumber, onReset, onGameOver }) {
     const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, selectedNumber));
-    const [rounds, setRounds] = useState(0);
+    const [pastGuesses, setPastGuesses] = useState([]);
     const currentHight = useRef(100);
     const currentLow = useRef(1);
 
     useEffect(() => {
-        if(currentGuess === selectedNumber) {
-            onGameOver(rounds)
+        if (currentGuess === selectedNumber) {
+            onGameOver(pastGuesses.length);
         }
     }, [currentGuess, selectedNumber, onGameOver])
-    
+
     const nextGuessHandler = (direction) => {
         if ((direction == 'lower' && currentGuess > selectedNumber)
             || (direction == 'grater' && currentGuess < selectedNumber)) {
@@ -50,10 +50,10 @@ export default function GamePage({ selectedNumber, onReset, onGameOver }) {
             currentHight.current = currentGuess;
         }
 
+        setPastGuesses(current => [currentGuess, ...current]);
         setCurrentGuess(
             generateRandomBetween(currentLow.current, currentHight.current, currentGuess)
         );
-        setRounds(r => r + 1);
     };
 
     return (
@@ -71,6 +71,18 @@ export default function GamePage({ selectedNumber, onReset, onGameOver }) {
                 </View>
             </Card>
             <Button title="RESET" onPress={onReset} />
+            <View style={styles.listContainer}>
+                <ScrollView>
+                    {
+                        pastGuesses.map(
+                            (guess, index) => <View style={styles.listItem} key={index}>
+                                <PText># {pastGuesses.length - index}</PText>
+                                <PText>{guess}</PText>
+                            </View>
+                        )
+                    }
+                </ScrollView>
+            </View>
         </View>
     )
 }
@@ -94,5 +106,18 @@ const styles = StyleSheet.create({
     },
     buttons: {
         width: '45%'
+    },
+    listContainer: {
+        flex: 1,
+        width: '80%',
+    },
+    listItem: {
+        padding: 12,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: '#ccc',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 2
     }
 })
