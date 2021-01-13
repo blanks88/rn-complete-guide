@@ -51,7 +51,7 @@ export default function PButton({ onPress, children, style, color, secondary }) 
 const styles = StyleSheet.create({
     primaryButton: {
         backgroundColor: Color.primay,
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         alignItems: 'center',
         paddingVertical: 12,
         borderRadius: 25,

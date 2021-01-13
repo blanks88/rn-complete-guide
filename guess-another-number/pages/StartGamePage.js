@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Alert, Button, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
+import React, { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { Alert, Keyboard, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 import SelectedNumber from '../components/SelectedNumber'
 import PButton from '../components/PButton'
@@ -60,12 +61,12 @@ export default function StartGamePage({ onGameStart }) {
                     <View style={styles.buttonContainer}>
                         <View style={styles.button}>
                             <PButton color={'accent'} secondary={true} onPress={resetInputHandler}>
-                                RESET
+                            <Ionicons name="refresh" size={32} />
                             </PButton>
                         </View>
                         <View style={styles.button}>
                             <PButton onPress={confirmInputHandler}>
-                                CONFIRM
+                                <Ionicons name="checkmark" size={32} />
                             </PButton>
                         </View>
                     </View>
