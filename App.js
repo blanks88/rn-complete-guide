@@ -3,10 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
-import Header from './guess-another-number/components/Header';
-import GameOver from './guess-another-number/pages/GameOver';
-import GamePage from './guess-another-number/pages/GamePage';
-import StartGamePage from './guess-another-number/pages/StartGamePage';
+import Header from './guess-another-number-deprecated/components/Header';
+import GameOver from './guess-another-number-deprecated/pages/GameOver';
+import GamePage from './guess-another-number-deprecated/pages/GamePage';
+import StartGamePage from './guess-another-number-deprecated/pages/StartGamePage';
 
 export default function App() {
   const [selectedNumber, setSelectedNumber] = useState();

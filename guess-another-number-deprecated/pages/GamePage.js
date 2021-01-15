@@ -50,10 +50,14 @@ export default function GamePage({ selectedNumber, onReset, onGameOver }) {
             currentHight.current = currentGuess;
         }
 
-        setPastGuesses(current => [currentGuess, ...current]);
-        setCurrentGuess(
-            generateRandomBetween(currentLow.current, currentHight.current, currentGuess)
-        );
+        const nextNumber = generateRandomBetween(
+            currentLow.current,
+            currentHight.current,
+            currentGuess
+        )
+
+        setCurrentGuess(nextNumber);
+        setPastGuesses(currentGuesses => [nextNumber, ...currentGuesses]);
     };
 
     return (
