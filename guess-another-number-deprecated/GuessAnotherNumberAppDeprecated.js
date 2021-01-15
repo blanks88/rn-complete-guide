@@ -3,18 +3,18 @@ import { StyleSheet, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
-import Header from './guess-another-number-deprecated/components/Header';
-import GameOver from './guess-another-number-deprecated/pages/GameOver';
-import GamePage from './guess-another-number-deprecated/pages/GamePage';
-import StartGamePage from './guess-another-number-deprecated/pages/StartGamePage';
+import Header from './components/Header';
+import StartGamePage from './pages/StartGamePage';
+import GameOver from './pages/GameOver';
+import GamePage from './pages/GamePage';
 
 export default function AppDeprecated() {
   const [selectedNumber, setSelectedNumber] = useState();
   const [totalRounds, setTotalRounds] = useState(0);
 
   let [fontsLoaded] = useFonts({
-    'hack': require('./assets/fonts/Hack-Regular.ttf'),
-    'hack-bold': require('./assets/fonts/Hack-Bold.ttf'),
+    'hack': require('../assets/fonts/Hack-Regular.ttf'),
+    'hack-bold': require('../assets/fonts/Hack-Bold.ttf'),
   });
 
   if (!fontsLoaded) return <AppLoading />
