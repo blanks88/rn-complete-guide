@@ -1,55 +1,69 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 
-import Header from './guess-another-number-deprecated/components/Header';
-import GameOver from './guess-another-number-deprecated/pages/GameOver';
-import GamePage from './guess-another-number-deprecated/pages/GamePage';
-import StartGamePage from './guess-another-number-deprecated/pages/StartGamePage';
+import Header from './guess-another-number/components/Header';
+import StartGameScreen from './guess-another-number/screens/StartGameScreen';
+import GameOverScreen from './guess-another-number/screens/GameOverScreen';
+import GameScreen from './guess-another-number/screens/GameScreen';
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    'open-sans': require('./assets/fonts/Hack-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/Hack-Bold.ttf')
+  });
+};
 
 export default function App() {
-  const [selectedNumber, setSelectedNumber] = useState();
-  const [totalRounds, setTotalRounds] = useState(0);
+  const [userNumber, setUserNumber] = useState();
+  const [guessRounds, setGuessRounds] = useState(0);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
-  let [fontsLoaded] = useFonts({
-    'hack': require('./assets/fonts/Hack-Regular.ttf'),
-    'hack-bold': require('./assets/fonts/Hack-Bold.ttf'),
-  });
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setDataLoaded(true)}
+        onError={err => console.log(err)}
+      />
+    );
+  }
 
-  if (!fontsLoaded) return <AppLoading />
-  
-
-  const onResetHandler = () => {
-    setSelectedNumber(null);
-    setTotalRounds(0);
+  const configureNewGameHandler = () => {
+    setGuessRounds(0);
+    setUserNumber(null);
   };
 
-  const gameStartHandler = (number) => {
-    setSelectedNumber(number);
-  }
-  const gameOverHandler = (totalRounds) => setTotalRounds(totalRounds);
+  const startGameHandler = selectedNumber => {
+    setUserNumber(selectedNumber);
+  };
 
+  const gameOverHandler = numOfRounds => {
+    setGuessRounds(numOfRounds);
+  };
+
+  let content = <StartGameScreen onStartGame={startGameHandler} />;
+
+  if (userNumber && guessRounds <= 0) {
+    content = (
+      <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
+    );
+  } else if (guessRounds > 0) {
+    content = (
+      <GameOverScreen
+        roundsNumber={guessRounds}
+        userNumber={userNumber}
+        onRestart={configureNewGameHandler}
+      />
+    );
+  }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <Header title="Guess a Number" />
-      {
-        !selectedNumber
-          ? <StartGamePage onGameStart={gameStartHandler} />
-          : totalRounds === 0
-            ? <GamePage
-              selectedNumber={selectedNumber}
-              onGameOver={gameOverHandler}
-              onReset={onResetHandler}
-            />
-            : <GameOver
-              selectedNuber={selectedNumber}
-              totalRounds={totalRounds}
-              onReset={onResetHandler}
-            />
-      }
-    </View>
+      {content}
+    </SafeAreaView>
   );
 }
 
