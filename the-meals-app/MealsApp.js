@@ -1,7 +1,11 @@
 import React from 'react';
+import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
+
+// import {MealsNavigator} from './navigation/MealsNavigator';
+import CategoriesScreen from './screens/CategoriesScreen';
 
 export default function MealsApp() {
 
@@ -13,9 +17,7 @@ export default function MealsApp() {
   if (!fontsLoaded) return <AppLoading />
 
   return (
-    <View style={styles.screen}>
-      <Text>MealsApp</Text>
-    </View>
+    <CategoriesScreen />
   );
 }
 
