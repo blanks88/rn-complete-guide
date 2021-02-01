@@ -1,26 +1,27 @@
 import React from 'react'
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import CategoryGridTile from '../components/CategoryGridTile';
 import { CATEGORIES } from '../data/dummy-data';
 
 export default function CategoriesScreen({ navigation }) {
     const renderGridItem = ({ item }) => {
+        const { color, id, title } = item;
         return (
-            <TouchableOpacity
-                style={styles.gridItem}
-                onPress={() => {
+            <CategoryGridTile
+                title={title}
+                style={{
+                        backgroundColor: color
+                    }}
+                onSelect={() => {
                     navigation.navigate({
                         name: 'CategoryMeals',
                         params: {
-                            categoryId: item.id,
-                            title: item.title
+                            categoryId: id,
+                            title: title
                         }
                     });
                 }}
-            >
-                <View>
-                    <Text>{item.title}</Text>
-                </View>
-            </TouchableOpacity>
+            />
         );
     };
 

@@ -4,7 +4,7 @@ import { enableScreens } from 'react-native-screens'
 
 import GuessAnotherNumberAppDeprecated from './guess-another-number-deprecated/GuessAnotherNumberAppDeprecated';
 import GuessAnotherNumberApp from './guess-another-number/GuessAnotherNumberApp';
-import MealsNavigator from './the-meals-app/navigation/MealsNavigator';
+import MealsApp from './the-meals-app/MealsApp';
 
 enableScreens();
 
@@ -12,6 +12,6 @@ export default function App() {
   return (
     // <GuessAnotherNumberAppDeprecated />
     // <GuessAnotherNumberApp />
-    <MealsNavigator />
+    <MealsApp />
   );
 }

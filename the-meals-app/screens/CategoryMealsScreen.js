@@ -5,12 +5,12 @@ import { CATEGORIES } from '../data/dummy-data';
 
 const CategoryMealScreen = ({ route, navigation }) => {
   const { categoryId, title } = route.params
-  const selectedCategory = CATEGORIES.find(cat => cat.id === categoryId);
+  // const selectedCategory = CATEGORIES.find(cat => cat.id === categoryId);
 
   return (
     <View style={styles.screen}>
       <Text>The Category Meal Screen!</Text>
-      <Text>{selectedCategory.title}</Text>
+      <Text>{title}</Text>
       <Button
         title="Go to Details"
         onPress={() => {
